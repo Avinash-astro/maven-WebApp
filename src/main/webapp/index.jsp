@@ -3,6 +3,6 @@
 <title>home page</title>
 </head>
 <body>
-<h2>Hello World!</h2>
+<h2>Maven web app demo</h2>
 </body>
 </html>
