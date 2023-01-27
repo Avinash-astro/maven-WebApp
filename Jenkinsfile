@@ -28,6 +28,10 @@ pipeline
 //         }
         stage ('Build')
         { 
+            environment
+            {
+                  HOME="."
+            }
             steps 
             {
                echo "building"
