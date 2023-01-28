@@ -1,7 +1,27 @@
-From maven:3.6.0-jdk-13
+From ubuntu:lunar
 
-CMD [ "mvn", "--version"]
+RUN apt-get update -y && apt-get -y upgrade
 
-COPY maven-WebApp /
+RUN apt-get install wget -y
 
-CMD [ "mvn", "package"]
+RUN apt-get install maven -y
+
+COPY . /home/maven
+
+RUN mvn --version
+
+RUN cd /home/maven/ && mvn package
+
+RUN mkdir /opt/tomcat
+
+RUN wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.71/bin/apache-tomcat-9.0.71.tar.gz -O /tmp/tomcat.tar.gz
+
+RUN cd /tmp && tar xvfz tomcat.tar.gz
+
+RUN cp -R /tmp/apache-tomcat-9.0.71/* /opt/tomcat/
+
+RUN cp /home/maven/target/*.war /opt/tomcat/webapps
+
+EXPOSE 9090
+
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]
