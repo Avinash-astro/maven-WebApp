@@ -12,15 +12,16 @@ pipeline {
       steps 
       {
         echo "Building docker image.."
-        bat 'docker build -t maven-webapp .'
-        echo "Docker image built with tag : maven-WebApp " 
+        bat 'docker build -t maven-build-deploy .'
+        echo "Docker image built with tag : maven-build-deploy " 
       }
     }
     stage("run") {
       steps 
       {
         echo "Running docker container.."
-        bat 'docker run --rm maven-webapp'
+        bat 'docker run -d -p 9090:8080 maven-build-deploy'
+        echo "Tomcat container URL: http://localhost:9090/SampleApp/"
       }
     }
   }
