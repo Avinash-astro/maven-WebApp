@@ -6,11 +6,7 @@ RUN apt-get install wget -y
 
 RUN apt-get install maven -y
 
-COPY . /home/maven
-
 RUN mvn --version
-
-RUN cd /home/maven/ && mvn package
 
 RUN mkdir /opt/tomcat
 
@@ -19,6 +15,12 @@ RUN wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.71/bin/apache-tomcat-9.0.
 RUN cd /tmp && tar xvfz tomcat.tar.gz
 
 RUN cp -R /tmp/apache-tomcat-9.0.71/* /opt/tomcat/
+
+WORKDIR /home/maven/
+
+COPY . /home/maven
+
+RUN  mvn package
 
 RUN cp /home/maven/target/*.war /opt/tomcat/webapps
 
