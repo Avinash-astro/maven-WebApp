@@ -20,7 +20,7 @@ pipeline {
       steps 
       {
         echo "Running docker container.."
-        bat 'docker run --rm -d -p 9090:8080 maven-build-deploy'
+        bat 'docker run --rm -p 9090:8080 maven-build-deploy'
         echo "Tomcat container URL: http://localhost:9090/SampleApp/"
       }
     }
