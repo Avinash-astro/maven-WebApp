@@ -22,6 +22,8 @@ pipeline {
         echo "Running docker container.."
         bat 'docker run -d --name=maven-build-deploy-1 -p 9090:8080 maven-build-deploy'
         echo "Tomcat container URL: http://localhost:9090/SampleApp/"
+        bat 'docker cp maven-build-deploy-1:/home/maven/* .'
+        echo "copied the target folder"
       }
     }
   }
