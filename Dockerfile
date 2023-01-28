@@ -4,6 +4,10 @@ RUN apt-get update -y && apt-get -y upgrade
 
 RUN apt-get install wget -y
 
+RUN apt install openjdk-11-jdk -y
+
+RUN java -version && javac -version
+
 RUN apt-get install maven -y
 
 RUN mvn --version
