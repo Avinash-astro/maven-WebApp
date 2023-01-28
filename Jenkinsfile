@@ -12,7 +12,7 @@ pipeline {
       steps 
       {
         echo "Building docker image.."
-        bat 'docker build -t maven-WebApp .'
+        bat 'docker build -t maven-webapp .'
         echo "Docker image built with tag : maven-WebApp " 
       }
     }
@@ -20,7 +20,7 @@ pipeline {
       steps 
       {
         echo "Running docker container.."
-        bat 'docker run --rm maven-WebApp'
+        bat 'docker run --rm maven-webapp'
       }
     }
   }
