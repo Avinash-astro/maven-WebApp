@@ -1,12 +1,12 @@
 pipeline 
 { 
-    agent 
-    {
-        dockerfile{
+    agent any
+    //{
+    //    dockerfile{
             //image "maven:3.6.0-jdk-13"
             //label "docker"
-        }
-    } 
+    //    }
+    //} 
     stages 
     {
         stage ('Git checkout')
@@ -28,32 +28,28 @@ pipeline
 //         }
         stage ('Build')
         { 
-            environment
-            {
-                  HOME="."
-            }
             steps 
             {
                echo "building"
                bat 'java -version'
                bat 'mvn --version'
-               bat 'mvn clean install'
-               echo "mvn clean install completed using maven docker image "
+               bat 'mvn package'
+               echo "war file created.."
             }
         }
-        // stage ('Deploy') 
-        // { 
-        //     steps
-        //     {
-        //         echo "Deploying the app in Tomcat server"
+        stage ('Deploy') 
+        { 
+            steps
+            {
+                echo "Deploying the app in Tomcat server"
                 
-        //         bat 'dir'
-        //         bat "copy target\\SampleApp.war E:\\Avi\\apache-tomcat-10.0.27\\apache-tomcat-10.0.27\\webapps"
-        //         bat 'dir'
+                bat 'dir'
+                bat "copy target\\SampleApp.war E:\\Avi\\apache-tomcat-10.0.27\\apache-tomcat-10.0.27\\webapps"
+                bat 'dir'
                 
-        //         echo "Default Tomcat URL http://localhost:8181/ "
-        //     }
-        // }
+                echo "Default Tomcat URL http://localhost:8181/ "
+            }
+        }
 
     }
     
